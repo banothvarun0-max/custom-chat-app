@@ -1,0 +1,35 @@
+name: Android CI Cloud Compiler Build Engine
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Source Code Project Tree
+      uses: actions/checkout@v3
+
+    - name: Set up Java Production Development Runtime Environment
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+
+    - name: Setup Android SDK Platform Toolset
+      uses: android-actions/setup-android@v3
+
+    - name: Compile and Assemble Secure Production Signed APK Container File
+      run: |
+        mkdir -p out/classes out/dex out/res
+        aapt package -f -m -J app/src/main/java -M app/src/main/AndroidManifest.xml -S app/src/main/res -I $ANDROID_HOME/platforms/android-33/android.jar
+        javac -source 1.8 -target 1.8 -d out/classes app/src/main/java/com/banoth/chatapp/MainActivity.java
+        dx --dex --output=out/classes.dex out/classes
+        aapt package -f -M app/src/main/AndroidManifest.xml -S app/src/main/res -I $ANDROID_HOME/platforms/android-33/android.jar -F out/CustomChatApp.unsigned.apk
+        aapt add out/CustomChatApp.unsigned.apk out/classes.dex
+        keytool -genkeypair -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US" -noprompt
+        apksigner sign --ks debug.keystore --ks-pass pass:android --out out/CustomChatApp.apk out/CustomChatApp.unsigned.apk
+
+    - name: Upload Completed App Package To Cloud Storage System Layout Channels
+      uses: actions/upload-artifact@v3
+      with:
+        name: CustomChatApp-Installer-Package
+        path: out/CustomChatApp.apk
