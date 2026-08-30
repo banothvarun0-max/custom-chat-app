@@ -1,0 +1,27 @@
+name: Android CI Cloud Compiler Build Engine
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Source Code Project Tree
+      uses: actions/checkout@v4
+
+    - name: Set up Java Production Development Runtime Environment
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Setup Gradle Build Automation Engine Tools
+      uses: gradle/actions/setup-gradle@v4
+
+    - name: Build App Using Gradle Engine
+      run: gradle assembleDebug
+
+    - name: Upload Completed App Package To Cloud Storage System Layout Channels
+      uses: actions/upload-artifact@v4
+      with:
+        name: CustomChatApp-Installer-Package
+        path: "**/build/outputs/apk/debug/*.apk"
