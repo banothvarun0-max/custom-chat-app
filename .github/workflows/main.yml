@@ -14,17 +14,17 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Setup Gradle Build Automation Engine Tools
+    - name: Setup Default Global Gradle Command Line Tools
       uses: gradle/actions/setup-gradle@v4
-      with:
-        gradle-version: '8.4'
+
+    - name: Auto-Generate Core Wrapper Script Configurations Natively
+      run: gradle wrapper --gradle-version 8.4
 
     - name: Build App Using Gradle Engine
-      run: gradle assembleDebug
+      run: ./gradlew assembleDebug
 
     - name: Upload Completed App Package To Cloud Storage System Layout Channels
       uses: actions/upload-artifact@v4
       with:
         name: CustomChatApp-Installer-Package
         path: "**/build/outputs/apk/debug/*.apk"
-        
