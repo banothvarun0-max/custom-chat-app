@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://android.com"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Custom Chat App"
+        android:textSize="28sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"/>
+
+    <!-- Manual State Selector Option Dropdown Spinner -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Your Active State:"
+        android:layout_marginTop="24dp"/>
+        
+    <Spinner
+        android:id="@+id/stateSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Google Login Action Interface Button Component -->
+    <Button
+        android:id="@+id/btnGoogleLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign In With Google"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#4285F4"/>
+
+    <!-- Chat Message List Container Block (Kept Blank for History) -->
+    <ListView
+        android:id="@+id/chatListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Google AdMob Banner Integration Anchor -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adMobBannerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        xmlns:ads="http://android.com"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+
+</LinearLayout>
