@@ -14,3 +14,16 @@ android {
         versionName "1.0"
     }
 }
+
+dependencies {
+    // Free Local Storage Database Engine
+    implementation 'androidx.room:room-runtime:2.5.2'
+    annotationProcessor 'androidx.room:room-compiler:2.5.2'
+    
+    // Free Google Authentication Plugin Layer
+    implementation 'com.google.firebase:firebase-auth:22.1.1'
+    implementation 'com.google.android.gms:play-services-auth:20.6.0'
+    
+    // Free Live AdMob Ads Integration
+    implementation 'com.google.android.gms:play-services-ads:22.3.0'
+}
