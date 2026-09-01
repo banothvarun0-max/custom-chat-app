@@ -16,12 +16,11 @@ jobs:
 
     - name: Setup Default Global Gradle Command Line Tools
       uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.4'
 
-    - name: Auto-Generate Core Wrapper Script Configurations Natively
-      run: gradle wrapper --gradle-version 8.4
-
-    - name: Build App Using Gradle Engine
-      run: ./gradlew assembleDebug
+    - name: Build App Natively at Root Level
+      run: gradle assembleDebug --no-daemon
 
     - name: Upload Completed App Package To Cloud Storage System Layout Channels
       uses: actions/upload-artifact@v4
